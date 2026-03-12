@@ -1,7 +1,9 @@
 "use client";
 
 import z from "zod";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,8 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authClient } from "@/lib/auth/auth-client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 const signInSchema = z.object({
   email: z.email("Invalid email address"),
@@ -23,7 +23,7 @@ const signInSchema = z.object({
 
 type SignInForm = z.infer<typeof signInSchema>;
 
-const SignUpTab = () => {
+const SignInTab = () => {
   const router = useRouter();
   const form = useForm<SignInForm>({
     resolver: zodResolver(signInSchema),
@@ -57,7 +57,7 @@ const SignUpTab = () => {
           render={({ field, fieldState }) => (
             <Field>
               <FieldLabel>Email</FieldLabel>
-              <Input {...field} />
+              <Input {...field} type="email" />
               <FieldError errors={[fieldState.error]} />
             </Field>
           )}
@@ -81,4 +81,4 @@ const SignUpTab = () => {
   );
 };
 
-export default SignUpTab;
+export default SignInTab;

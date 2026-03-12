@@ -18,5 +18,14 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        enum: ["patient", "physiotherapist"],
+        defaultValue: "physiotherapist",
+      },
+    },
+  },
   plugins: [nextCookies()],
 });
