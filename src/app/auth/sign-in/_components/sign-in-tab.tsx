@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { authClient } from "@/lib/auth/auth-client";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -13,8 +15,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { authClient } from "@/lib/auth/auth-client";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 
 const signInSchema = z.object({
   email: z.email("Invalid email address"),
@@ -33,6 +34,8 @@ const SignInTab = () => {
     },
   });
 
+  const { isSubmitting } = form.formState;
+
   const handleSignIn = async (data: SignInForm) => {
     await authClient.signIn.email(
       { ...data },
@@ -48,6 +51,7 @@ const SignInTab = () => {
       }
     );
   };
+
   return (
     <form className="space-y-4" onSubmit={form.handleSubmit(handleSignIn)}>
       <FieldGroup>
@@ -75,7 +79,9 @@ const SignInTab = () => {
           )}
         />
 
-        <Button type="submit">Sign In</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          <LoadingSwap isLoading={isSubmitting}>Sign In</LoadingSwap>
+        </Button>
       </FieldGroup>
     </form>
   );

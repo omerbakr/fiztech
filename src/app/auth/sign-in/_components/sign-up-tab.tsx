@@ -1,8 +1,12 @@
 "use client";
 
 import z from "zod";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
+import { authClient } from "@/lib/auth/auth-client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -10,11 +14,8 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { authClient } from "@/lib/auth/auth-client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 const signUpSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters long"),
@@ -34,6 +35,8 @@ const SignUpTab = () => {
       password: "",
     },
   });
+
+  const { isSubmitting } = form.formState;
 
   const handleSignUp = async (data: SignUpForm) => {
     await authClient.signUp.email(
@@ -87,7 +90,9 @@ const SignUpTab = () => {
           )}
         />
 
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          <LoadingSwap isLoading={isSubmitting}>Sign Up</LoadingSwap>
+        </Button>
       </FieldGroup>
     </form>
   );
