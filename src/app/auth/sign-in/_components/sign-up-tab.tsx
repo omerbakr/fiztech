@@ -70,7 +70,7 @@ const SignUpTab = () => {
           render={({ field, fieldState }) => (
             <Field>
               <FieldLabel>Email</FieldLabel>
-              <Input {...field} />
+              <Input {...field} type="email" />
               <FieldError errors={[fieldState.error]} />
             </Field>
           )}
