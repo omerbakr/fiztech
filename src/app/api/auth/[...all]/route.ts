@@ -91,7 +91,6 @@ export const checkArcjet = async (request: Request) => {
             rateLimit: restrictiveRateLimitSettings,
           })
         )
-        .withRule(slidingWindow(restrictiveRateLimitSettings))
         .protect(request, { email: body.email, userIdOrIp });
     } else {
       return aj
