@@ -76,7 +76,7 @@ export const checkArcjet = async (request: Request) => {
   const userIdOrIp = (session?.user.id ?? findIp(request)) || "127.0.0.1";
 
   const { pathname } = new URL(request.url);
-  if (pathname.endsWith("/auth/sign-up")) {
+  if (pathname.includes("/auth/sign-up")) {
     if (
       body &&
       typeof body === "object" &&
@@ -91,6 +91,7 @@ export const checkArcjet = async (request: Request) => {
             rateLimit: restrictiveRateLimitSettings,
           })
         )
+        .withRule(slidingWindow(restrictiveRateLimitSettings))
         .protect(request, { email: body.email, userIdOrIp });
     } else {
       return aj
