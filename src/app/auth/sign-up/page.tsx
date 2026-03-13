@@ -6,22 +6,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import SignInTab from "./_components/sign-in-tab";
+import SignUpTab from "./_components/sign-up-tab";
 
 const Page = () => {
   return (
     <div className="mx-auto my-6 max-w-lg px-4">
       <Card>
         <CardHeader>
-          <CardTitle>Sign In</CardTitle>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardTitle>Sign Up</CardTitle>
+          <CardDescription>Create a new account</CardDescription>
         </CardHeader>
         <CardContent>
-          <SignInTab />
+          <SignUpTab />
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
-            <Link href="/auth/sign-up" className="text-primary underline">
-              Sign Up
+            Already have an account?{" "}
+            <Link href="/auth/sign-in" className="text-primary underline">
+              Sign In
             </Link>
           </p>
         </CardContent>
