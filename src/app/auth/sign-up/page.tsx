@@ -18,7 +18,7 @@ const Page = () => {
         </CardHeader>
         <CardContent>
           <SignUpTab />
-          <p className="mt-4 text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-center text-sm">
             Already have an account?{" "}
             <Link href="/auth/sign-in" className="text-primary underline">
               Sign In
