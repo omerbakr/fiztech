@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
+import { Separator } from "@/components/ui/separator";
+import SocialAuthButtons from "../../_components/social-auth-buttons";
 
 const signInSchema = z.object({
   email: z.email("Invalid email address"),
@@ -82,6 +84,9 @@ const SignInTab = () => {
         <Button type="submit" disabled={isSubmitting}>
           <LoadingSwap isLoading={isSubmitting}>Sign In</LoadingSwap>
         </Button>
+
+        <Separator />
+        <SocialAuthButtons />
       </FieldGroup>
     </form>
   );
